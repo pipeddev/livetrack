@@ -1,0 +1,27 @@
+# General
+.DS_Store
+.idea/
+.vscode/
+*.log
+.env
+.env.*
+!.env.example
+
+# Java / Maven / Gradle
+target/
+build/
+.gradle/
+*.class
+!**/gradle/wrapper/gradle-wrapper.jar
+
+# Go
+location-ingest/bin/
+*.exe
+*.test
+*.out
+
+# Node / Angular
+node_modules/
+dist/
+.angular/
+coverage/
