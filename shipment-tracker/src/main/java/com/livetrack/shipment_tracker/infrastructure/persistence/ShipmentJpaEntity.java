@@ -22,13 +22,24 @@ public class ShipmentJpaEntity {
     private UUID customerId;
     private Instant createdAt;
 
+    private Double lastLat;          // wrapper: null mientras no haya ubicaciones
+    private Double lastLng;
+    private long lastSequence;
+    private Instant lastLocationAt;
+
+
+    @Version
+    private Long version;
+
     protected ShipmentJpaEntity() {
         // constructor vacío requerido por JPA
     }
 
     public ShipmentJpaEntity(UUID id, ShipmentStatus status, double originLat, double originLng,
                              double destinationLat, double destinationLng,
-                             UUID customerId, Instant createdAt) {
+                             UUID customerId, Instant createdAt,
+                             Double lastLat, Double lastLng, long lastSequence,
+                             Instant lastLocationAt, Long version) {
         this.id = id;
         this.status = status;
         this.originLat = originLat;
@@ -37,37 +48,24 @@ public class ShipmentJpaEntity {
         this.destinationLng = destinationLng;
         this.customerId = customerId;
         this.createdAt = createdAt;
+        this.lastLat = lastLat;
+        this.lastLng = lastLng;
+        this.lastSequence = lastSequence;
+        this.lastLocationAt = lastLocationAt;
+        this.version = version;
     }
 
-    public UUID getId() {
-        return id;
-    }
-
-    public ShipmentStatus getStatus() {
-        return status;
-    }
-
-    public double getOriginLat() {
-        return originLat;
-    }
-
-    public double getOriginLng() {
-        return originLng;
-    }
-
-    public double getDestinationLat() {
-        return destinationLat;
-    }
-
-    public double getDestinationLng() {
-        return destinationLng;
-    }
-
-    public UUID getCustomerId() {
-        return customerId;
-    }
-
-    public Instant getCreatedAt() {
-        return createdAt;
-    }
+    public UUID getId() { return id; }
+    public ShipmentStatus getStatus() { return status; }
+    public double getOriginLat() { return originLat; }
+    public double getOriginLng() { return originLng; }
+    public double getDestinationLat() { return destinationLat; }
+    public double getDestinationLng() { return destinationLng; }
+    public UUID getCustomerId() { return customerId; }
+    public Instant getCreatedAt() { return createdAt; }
+    public Double getLastLat() { return lastLat; }
+    public Double getLastLng() { return lastLng; }
+    public long getLastSequence() { return lastSequence; }
+    public Instant getLastLocationAt() { return lastLocationAt; }
+    public Long getVersion() { return version; }
 }

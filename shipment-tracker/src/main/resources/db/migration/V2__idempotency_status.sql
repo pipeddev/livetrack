@@ -1,0 +1,5 @@
+ALTER TABLE idempotency_keys
+    ADD COLUMN IF NOT EXISTS status       VARCHAR(20) NOT NULL DEFAULT 'COMPLETED',
+    ADD COLUMN IF NOT EXISTS request_hash VARCHAR(64);
+
+ALTER TABLE idempotency_keys ALTER COLUMN shipment_id DROP NOT NULL;

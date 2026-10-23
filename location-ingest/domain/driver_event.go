@@ -5,7 +5,7 @@ import "time"
 type DriverReservedEvent struct {
 	EventID 	string		`json:"eventId"`
 	EventType 	string 		`json:"eventType"`
-	OcurredAt 	time.Time	`json:"occurredAt"`
+	OccurredAt 	time.Time	`json:"occurredAt"`
 	ShipmentID 	string		`json:"shipmentId"`
 	Payload    	struct {
 		DriverID   string 	`json:"driverId"`

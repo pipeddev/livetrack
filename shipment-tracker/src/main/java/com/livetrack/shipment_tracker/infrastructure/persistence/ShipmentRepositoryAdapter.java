@@ -28,25 +28,35 @@ public class ShipmentRepositoryAdapter implements ShipmentRepository {
     }
 
     private ShipmentJpaEntity toEntity(Shipment shipment) {
+        Coordinates last = shipment.getLastLocation();
+
         return new ShipmentJpaEntity(
-                shipment.getId(),
-                shipment.getStatus(),
+                shipment.getId(), shipment.getStatus(),
                 shipment.getOrigin().lat(), shipment.getOrigin().lng(),
                 shipment.getDestination().lat(), shipment.getDestination().lng(),
-                shipment.getCustomerId(),
-                shipment.getCreatedAt()
-        );
+                shipment.getCustomerId(), shipment.getCreatedAt(),
+                last == null ? null : last.lat(),
+                last == null ? null : last.lng(),
+                shipment.getLastSequence(),
+                shipment.getLastLocationAt(),
+                shipment.getVersion());
     }
 
     private Shipment toDomain(ShipmentJpaEntity entity) {
-        // reconstruye el Shipment de dominio a partir de la fila de la base de datos
+        Coordinates lastLocation = entity.getLastLat() == null ? null
+                : new Coordinates(entity.getLastLat(), entity.getLastLng());
+
         return Shipment.reconstruct(
                 entity.getId(),
                 entity.getStatus(),
                 new Coordinates(entity.getOriginLat(), entity.getOriginLng()),
                 new Coordinates(entity.getDestinationLat(), entity.getDestinationLng()),
                 entity.getCustomerId(),
-                entity.getCreatedAt()
+                entity.getCreatedAt(),
+                lastLocation,
+                entity.getLastSequence(),
+                entity.getLastLocationAt(),
+                entity.getVersion()
         );
     }
 }
